@@ -14,7 +14,7 @@ You could send the butt-lock output object to you by email, twitter or whatever 
 Example output:
 
 ```ascii
-WwI76NVTNeeSn00wAy9jzlpf3eJOtmXUM7h0Z+OAlJOxe27jdvy6lu+LG+RX3NDZQAIa1jjF2sVQKWgDooxi8FWxovahlng1qie7ksa2xbXE6w2EqDv1tu3pteK9rtGCFd7AcoQPPZpjfCkeB9uFt/fKozWN6rDnTqTgnylsRVo/j0S6XvPKP2levVlhfNqK8uAHLTCCo9oHTJNATUzz6XKYz5mXsjo+y95MmHbnaxM2hxnm1AL8yzVhKKPM0Fk7zP3GMp1l/mOn41D8i6j3lglIecDLi4h7LFQ656fTBBZRqaSrC8U/Z3gxggNlAsdAkgdDb8D77LDkTBr86L7XKAjSZK94sGC95DWXz28BfzSE8dYMb0nnGAH47WnHNy5rjyIY6bYeYHi6eNRqixYOxZgvvuoylrLgWsEQ0k+MpMdldFThHp0kLiwhxFjU76YHi16P9/e3NMpVWrDPtxrqwvTE+swCvdRWrsPEAz0jtqdM0fBWSO+mNefC/CbB1T0YYmjXYf+ZKo74AKv6ks7SRZ6nM45CNZIgnsdxThO0g9L7Da8tnXO3v+G57kvljPDsPeLT60E2liJNkUXK7qHnFoI+7QTVu2GqyBFVdNzE479lLQYo6biALCw7/ygVadKcYIe5cE4J7XvggSESs6CyCYOTVYTvsUCZXhkAuTN60Fk=;f0:18:98:30:34:0b;-----BEGIN PRIVATE KEY-----
+WwI76NVTNeeSn00wAy9jzlpf3eJOtm=;f0:18:98:30:34:0b;-----BEGIN PRIVATE KEY-----
 A 4096 length private key
 -----END PRIVATE KEY-----
 ```
