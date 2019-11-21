@@ -11,10 +11,7 @@ is finished, is the base64 encoded rsa-oaep encrypted aes-cbc key, the mac-addre
 
 You could send the butt-lock output object to you by email, twitter or whatever you prefer and... ;-). But remeber, it's only for education. DON'T DO IT!
 
-Example output:
-
+Example output with format [encrypted_aes_key base64 encoded, mac address, private key base 64 encoded]
 ```ascii
-WwI76NVTNeeSn00wAy9jzlpf3eJOtm=;f0:18:98:30:34:0b;-----BEGIN PRIVATE KEY-----
-A 4096 length private key
------END PRIVATE KEY-----
+WwI76NVTNeeSn00wAy9jzlpf3eJOtm=;f0:18:98:30:34:0b;LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUpRd0lCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQ
 ```

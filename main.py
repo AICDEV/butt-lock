@@ -11,13 +11,14 @@ def buttlock(mode):
        
         buttcrypt = Buttcrypt.Buttcrypt()
         encrypted_aes_key = buttcrypt.RSAEncryptContent(buttcrypt.getAesKey())
+        base64_private_key = base64.b64encode(buttcrypt.getPrivateKey())
 
         with open("./temp/buttlock_recovery", "wb+") as crypto_out:
             crypto_out.write(encrypted_aes_key)
             crypto_out.write(str(";").encode('utf-8'))
             crypto_out.write(str(Buttnet.getMacAddress()).encode('utf-8'))
             crypto_out.write(str(";").encode('utf-8'))
-            crypto_out.write(buttcrypt.getPrivateKey())
+            crypto_out.write(base64_private_key)
         with open("./temp/butt.txt", "rb") as in_file:
             encrypted_content = buttcrypt.encryptContent(in_file.read())
             with open("./temp/butt.txt", "wb+") as out_file:
@@ -31,7 +32,7 @@ def buttlock(mode):
             
             encrypted_aes_key = crypto_in_arr[0].strip()
             mac_address = crypto_in_arr[1]
-            private_key = crypto_in_arr[2].strip()
+            private_key = base64.b64decode(crypto_in_arr[2].strip())
 
             buttcrypt = Buttcrypt.Buttcrypt()
             decrypted_aes_key = buttcrypt.RSADecryptContent(base64.b64decode(encrypted_aes_key), private_key)
