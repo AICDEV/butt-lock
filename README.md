@@ -54,3 +54,14 @@ python3 main.py --mode=decrypt --dir ./temp --recovery ./buttlock/buttlock_recov
 ```
 
 This will decrypt all your files in ./temp. Important: You need the --recovery to decrypt the encrypted files.
+
+### dockerfile for direct testing
+IMPORTANT: I have only tested the dockerfile on my mac.
+
+Simply run the "builddocker.sh" script. It's create a docker container, starts the container and spawn you a shell where you can direct test butt-lock encryption and decryption.
+
+There are to files with instructions:
+
+HOW_TO_ENCRYPT and HOW_TO_DECRYPT
+
+or just simply watch into the dockerfile
