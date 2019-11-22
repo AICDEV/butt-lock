@@ -31,7 +31,7 @@ def buttlock(mode, dir, recovery, replace):
         source_dir = abspath(dir)
         print("dicking all files in: " + source_dir)
 
-        files = [f for f in glob.glob(source_dir+"/**/*.*", recursive=True)]
+        files = [f for f in glob.glob(source_dir+"/**/*", recursive=True)]
 
         for file in files:
             with open(file, "rb") as in_file:
@@ -61,7 +61,7 @@ def buttlock(mode, dir, recovery, replace):
             source_dir = abspath(dir)
             print("un-dicking all files in: " + source_dir)
 
-            files = [f for f in glob.glob(source_dir+"/**/*.*", recursive=True)]
+            files = [f for f in glob.glob(source_dir+"/**/*", recursive=True)]
 
             for file in files:
                 with open(file, "rb") as encrypted_input:
