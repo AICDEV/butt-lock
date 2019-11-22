@@ -15,3 +15,20 @@ Example output with format [encrypted_aes_key base64 encoded, mac address, priva
 ```ascii
 WwI76NVTNeeSn00wAy9jzlpf3eJOtm=;f0:18:98:30:34:0b;LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUpRd0lCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQ
 ```
+
+### how to use it to encrypt files
+Buttlock comes with a few command line options.
+
+-   --mode (simply set mode to encrypt or decrypt) default is encrypt
+-   --dir (input directory for encryption) just leave it empty if you are in decrypt mode
+-   --recovery (path to the buttlock_recovery file) it will be generated if you run encryption
+-   -- replace (just for encryption) if you wish that buttlock will create a encrypted copy of your file, simply add copy as argument (it also the default value). If you set replace as argument, buttlock will override all your files with the encrypted outpu. be careful!.
+
+Example call to encrypt file
+
+```ascii
+python3 main.py --mode=encrypt --dir ./temp --replace replace
+```
+This will encrypt all my files in temp directory and overrides the orginial files.
+
+Buttlock will create a folder ./buttlock there you can find the recovery file that you need to decrypting your files. don't modify it.
