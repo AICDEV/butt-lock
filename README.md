@@ -9,7 +9,7 @@ a random generated aes-cbc key. Before the encryption process starts, butt-lock 
 mac address. The aes-key itselfs will be encrypted with the generated public key, after that the public key will be deleted. The "output" after the encryption process
 is finished, is the base64 encoded rsa-oaep encrypted aes-cbc key, the mac-address and the private key (that's the important information, without a private key you are not able to decrypt the aes key).
 
-You could send the butt-lock output object to you by email, twitter or whatever you prefer and... ;-). But remeber, it's only for education. DON'T DO IT!
+You could send the butt-lock output object to you by email, twitter or whatever you prefer and... ;-). But remember, it's only for education. DON'T DO IT!
 
 Example output with format [encrypted_aes_key base64 encoded, mac address, private key base 64 encoded]
 ```ascii
