@@ -43,10 +43,10 @@ def buttlock(mode, dir, recovery, replace):
                     with open(file+".buttlock", "wb+") as out_file:
                         out_file.write(encrypted_content)
 
-    if mode == "decrypt" and recovery is not None:
-        print("undick your disk")    
+    if mode == "decrypt" and dir is not None and recovery is not None:
+        print("undicking your disk")    
 
-        with open("./temp/buttlock_recovery", "rb") as crypto_in:
+        with open(recovery, "rb") as crypto_in:
             crypto_in_arr = crypto_in.read().decode("utf-8").split(";")
             
             encrypted_aes_key = crypto_in_arr[0].strip()
@@ -55,6 +55,9 @@ def buttlock(mode, dir, recovery, replace):
 
             buttcrypt = Buttcrypt.Buttcrypt()
             decrypted_aes_key = buttcrypt.RSADecryptContent(base64.b64decode(encrypted_aes_key), private_key)
+
+            source_dir = abspath(dir)
+            print("un-dicking all files in: " + source_dir)
 
             with open("./temp/butt.txt", "rb") as encrypted_input:
                 decrypted = buttcrypt.decryptContent(decrypted_aes_key, encrypted_input.read())

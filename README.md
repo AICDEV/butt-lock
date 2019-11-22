@@ -24,7 +24,7 @@ Buttlock comes with a few command line options.
 -   --recovery (path to the buttlock_recovery file) it will be generated if you run encryption
 -   -- replace (just for encryption) if you wish that buttlock will create a encrypted copy of your file, simply add copy as argument (it also the default value). If you set replace as argument, buttlock will override all your files with the encrypted outpu. be careful!.
 
-Example call to encrypt file
+Example call to encrypt files and override
 
 ```ascii
 python3 main.py --mode=encrypt --dir ./temp --replace replace
@@ -32,3 +32,25 @@ python3 main.py --mode=encrypt --dir ./temp --replace replace
 This will encrypt all my files in temp directory and overrides the orginial files.
 
 Buttlock will create a folder ./buttlock there you can find the recovery file that you need to decrypting your files. don't modify it.
+
+Example call to encrypt files and create copy
+
+```ascii
+python3 main.py --mode=encrypt --dir ./temp --replace copy
+```
+
+### how to use it to decrypt files
+Buttlock comes with a few command line options.
+
+-   --mode (simply set mode to encrypt or decrypt) default is encrypt
+-   --dir (input directory for encryption) just leave it empty if you are in decrypt mode
+-   --recovery (path to the buttlock_recovery file) it will be generated if you run encryption
+-   -- replace (just for encryption) if you wish that buttlock will create a encrypted copy of your file, simply add copy as argument (it also the default value). If you set replace as argument, buttlock will override all your files with the encrypted outpu. be careful!.
+
+Example call to decrypt your files:
+
+```ascii
+python3 main.py --mode=decrypt --dir ./temp --recovery ./buttlock/buttlock_recovery
+```
+
+This will decrypt all your files in ./temp. Important: You need the --recovery to decrypt the encrypted files.
